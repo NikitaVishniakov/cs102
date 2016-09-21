@@ -18,7 +18,7 @@ def encrypt_caesar(plaintext):
                 ciphertext += chr(ord(i) - 23) 
         elif ord(i) == 32:
             ciphertext += chr(32)
-            print("You haven't entered the word")
+            print("You haven't entered any word")
         else: 
             if ord(i)+3 < 90:
                 ciphertext += chr(ord(i)+3)
@@ -42,7 +42,7 @@ def decrypt_caesar(ciphertext):
     ''
     """
     # PUT YOUR CODE HERE
-text = input("Enter your world:")
+text = input("Enter the word:")
 answer = input("You want to decrypt or encrypt the word?(e for encrypt/ d for decrypt: ").lower()
 if answer == "e":
     encrypt_caesar(text)
@@ -50,4 +50,3 @@ elif answer == "d":
     decrypt_caesar(text)
 else:
     print ("Please, type the correct letter(e or d)")
-    
