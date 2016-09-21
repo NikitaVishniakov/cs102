@@ -10,43 +10,37 @@ def encrypt_caesar(plaintext):
     ''
     """
     ciphertext = "";
+    error = 0
     for i in plaintext:
-        if ord(i) > 96:
-            if ord(i)+3 < 123:
-                ciphertext += chr(ord(i)+3)
-            else:
-                ciphertext += chr(ord(i) - 23) 
+        if (99 < ord(i) + 3 < 123) or (67 < ord(i) +3 < 90):
+            ciphertext += chr(ord(i) + 3)
         elif ord(i) == 32:
             ciphertext += chr(32)
-            print("You haven't entered any word")
-        else: 
-            if ord(i)+3 < 90:
-                ciphertext += chr(ord(i)+3)
-            else:
-                ciphertext += chr(ord(i) - 23)
-    print("your word was: " + plaintext)
-    print("encryped word: " + ciphertext)
+        else:
+            ciphertext += chr(ord(i) - 23) 
+    print(plaintext)
+    return ciphertext   
     
     # PUT YOUR CODE HERE
     #return ciphertext
 
 def decrypt_caesar(ciphertext):
-    """ 
-    Decrypts a ciphertext using a Caesar cipher.
+    plaintext = ""
+    for i in ciphertext:
+        if (93 < ord(i) - 3 < 97) or (62 < ord(i) - 3 < 65):
+            plaintext += chr(ord(i) + 23)
+        elif ord(i) == 32:
+            plaintext += chr(32)
+        else:
+            plaintext += chr(ord(i) - 3)
+    print(ciphertext)
+    return plaintext
 
-    >>> decrypt_caesar("SBWKRQ")
-    'PYTHON'
-    >>> decrypt_caesar("sbwkrq")
-    'python'
-    >>> decrypt_caesar("")
-    ''
-    """
-    # PUT YOUR CODE HERE
-text = input("Enter the word:")
+text = input("Enter a word:")
 answer = input("You want to decrypt or encrypt the word?(e for encrypt/ d for decrypt: ").lower()
 if answer == "e":
-    encrypt_caesar(text)
+    print(encrypt_caesar(text))
 elif answer == "d":
-    decrypt_caesar(text)
+    print(decrypt_caesar(text))
 else:
     print ("Please, type the correct letter(e or d)")
