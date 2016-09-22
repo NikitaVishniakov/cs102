@@ -13,7 +13,7 @@ def encrypt_caesar(plaintext, shift):
 def decrypt_caesar(ciphertext, shift):
     plaintext = ""
     for i in ciphertext:
-        if (96 - shift < ord(i) - shift < 97) or (64 - shift < ord(i) - shift < 64):
+        if (96 - shift < ord(i) - shift < 97 + shift) or (64 - shift < ord(i) - shift < 65 + shift):
             plaintext += chr(ord(i) + 26 - shift)
         elif ord(i) == 32:
             plaintext += chr(32)
