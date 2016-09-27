@@ -2,7 +2,7 @@ def key_convert(text, key):
     if len(text) > len(key):
         key = key*(len(text)//len(key))  + key[0:len(text)%len(key)]
     elif len(text) < len(key):
-        key = key[0:key - len(key)%len(text)]
+        key = key[0:len(text)]
     return key
 def encrypt_vigenere(plaintext, keyword):
     """
@@ -19,9 +19,10 @@ def encrypt_vigenere(plaintext, keyword):
     keyword = key_convert(plaintext, keyword)
     print(keyword)
     for i in range(0,len(plaintext)):
-        ciphertext += chr(ord(plaintext[i]) + (ord(keyword[i]) - 97))
-    
-    # PUT YOUR CODE HERE
+        if (96 < ord(plaintext[i]) < 123 - (ord(keyword[i].lower()) - 97)) or (64 < ord(plaintext[i]) < 91- (ord(keyword[i].lower()) - 97)):
+            ciphertext += chr(ord(plaintext[i]) + ord(keyword[i].lower()) - 97)
+        else:
+            ciphertext += chr(64 + (ord(plaintext[i]) - 90) + (ord(keyword[i].lower()) - 97))
     return ciphertext
 
 
@@ -36,7 +37,14 @@ def decrypt_vigenere(ciphertext, keyword):
     >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
     'ATTACKATDAWN'
     """
-    # PUT YOUR CODE HERE
+    plaintext = ""
+    keyword = key_convert(ciphertext, keyword)
+    print(keyword)
+    for i in range(0,len(ciphertext)):
+        if (96 + (ord(keyword[i].lower()) - 97) < ord(ciphertext[i]) < 123) or (64 + (ord(keyword[i].lower()) - 97) < ord(ciphertext[i]) < 91):
+            plaintext += chr(ord(ciphertext[i]) - (ord(keyword[i].lower()) - 97))
+        else:
+            plaintext += chr(91 - (65 - ord(ciphertext[i]) + (ord(keyword[i].lower()) - 97))) 
     return plaintext
 text = input("Enter the word: ")
 key = input("Enter the key: ")
